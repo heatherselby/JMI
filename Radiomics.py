@@ -357,7 +357,6 @@ if __name__ == '__main__':
     sample.write_nnunet()
 
     sample.get_features()
-    # sample
 
 
 
