@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
 
-    FM= pd.read_csv("VA_SF_FM_Features.csv")
+    FM = pd.read_csv("VA_SF_FM_Features.csv")
     FM.rename(columns={'Unnamed: 0': 'Patient'}, inplace=True)
 
     # samples = pd.read_csv("VA_PA_RAJ_FM_Features.csv")
@@ -46,17 +46,17 @@ if __name__ == '__main__':
 
     dat_scaled = pd.DataFrame(scaled_data, columns=dat.columns)
 
-    # covars = pd.DataFrame({'Batch': annot["Contrast"].map({'N': 1, 'Y': 2}),
-    #                        'Diagnosis': annot["Diagnosis"].map({'Benign': 1, 'Malignant': 2})})
-    # categorical_cols = ['Diagnosis']
-    # batch_col = 'Batch'
-    #
-    # dat1 = dat_scaled.transpose()
-    # data_combat = neuroCombat(dat=dat1,
-    #                           covars=covars,
-    #                           batch_col=batch_col,
-    #                           categorical_cols=categorical_cols)["data"]
-    # dat_scaled = pd.DataFrame(data_combat.transpose(), columns=dat.columns, index=dat.index)
+    covars = pd.DataFrame({'Batch': annot["Contrast"].map({'N': 1, 'Y': 2}),
+                           'Diagnosis': annot["Diagnosis"].map({'Benign': 1, 'Malignant': 2})})
+    categorical_cols = ['Diagnosis']
+    batch_col = 'Batch'
+
+    dat1 = dat_scaled.transpose()
+    data_combat = neuroCombat(dat=dat1,
+                              covars=covars,
+                              batch_col=batch_col,
+                              categorical_cols=categorical_cols)["data"]
+    dat_scaled = pd.DataFrame(data_combat.transpose(), columns=dat.columns, index=dat.index)
 
     X = dat_scaled.copy()
     pca = PCA(n_components=4)
